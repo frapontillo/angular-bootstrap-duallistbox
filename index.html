@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Angular Bootstrap DualListbox by frapontillo</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Angular Bootstrap DualListbox</h1>
+        <p>Angular directive to include Bootstrap Dual Listbox in your apps.</p>
+
+        <p class="view"><a href="https://github.com/frapontillo/angular-bootstrap-duallistbox">View the Project on GitHub <small>frapontillo/angular-bootstrap-duallistbox</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/frapontillo/angular-bootstrap-duallistbox/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/frapontillo/angular-bootstrap-duallistbox/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/frapontillo/angular-bootstrap-duallistbox">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>Angular directive to include <a href="https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox">Bootstrap Dual Listbox</a> in your apps.</p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
+
+<pre lang="shell"><code>$ bower install angular-bootstrap-duallistbox
+</code></pre>
+
+<p>This will install AngularJS, jQuery, and the original bootstrap-duallistbox.</p>
+
+<h3>
+<a name="directive" class="anchor" href="#directive"><span class="octicon octicon-link"></span></a>Directive</h3>
+
+<p>The directive has to be applied to an already existing <code>select</code> element with the <code>multiple</code> attribute:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;select</span>
+    <span class="na">ng-options=</span><span class="s">"el in elements"</span>
+    <span class="na">multiple</span>
+    <span class="na">ng-model=</span><span class="s">"selections"</span>
+    <span class="na">bs-duallistbox</span>
+    <span class="nt">&gt;&lt;/select&gt;</span>
+</pre></div>
+
+<p>Set the <code>select</code> attributes as you would normally do for a regular multiple list, and add <code>bs-duallistbox</code> to enable the plugin.</p>
+
+<h4>
+<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h4>
+
+<p>The available options for the dual listbox are:</p>
+
+<ul>
+<li>
+<code>bootstrap2</code>, if <code>true</code> enables compatibility with Bootstrap 2, otherwise it defaults to Bootstrap 3.</li>
+<li>
+<code>postfix</code>, the added selects will have the same name as the original one, concatenated with this string and <code>1</code>
+(for the non selected list, e.g. <code>element_helper1</code>) or <code>2</code> (for the selected list, e.g. <code>element_helper2</code>).</li>
+<li>
+<code>select-min-height</code>, the minimum height for the dual listbox.</li>
+<li>
+<code>filter</code>, if <code>true</code> it enables filtering the dual listbox, otherwise it defaults to <code>false</code>.</li>
+<li>
+<code>filter-clear</code>, the text of the "Clear filter" <code>button</code>s.</li>
+<li>
+<code>filter-placeholder</code>, the placeholder text for the filter <code>input</code>s.</li>
+<li>
+<code>filter-values</code>, if <code>true</code> enables filtering on values too.</li>
+<li>
+<code>filter-non-selected</code>, the variable that will be bound to the filter <code>input</code> of the non-selected options.</li>
+<li>
+<code>filter-selected</code>, the variable that will be bound to the filter <code>input</code> of the selected options.</li>
+<li>
+<code>move-on-select</code>, defaults to <code>true</code>, determines whether to move options upon selection.</li>
+<li>
+<code>preserve-selection</code>, can be
+
+<ul>
+<li>
+<code>'all'</code>, for selecting both moved elements and the already selected ones in the target list</li>
+<li>
+<code>'moved'</code>, for selecting moved elements only</li>
+<li>
+<code>false</code>, the default not to preserve anything</li>
+</ul>
+</li>
+<li>
+<code>move-selected-label</code>, is the label for the "Move Selected" button, defaults to <code>'Move selected'</code>.</li>
+<li>
+<code>move-all-label</code>, is the label for the "Move All" button, defaults to <code>'Move all'</code>.</li>
+<li>
+<code>remove-selected-label</code>, is the label for the "Remove Selected" button, defaults to <code>'Remove selected'</code>.</li>
+<li>
+<code>remove-all-label</code>, is the label for the "Remove All" button, defaults to <code>'Remove all'</code>.</li>
+<li>
+<code>selected-list-label</code>, can be a <code>string</code> specifying the name of the selected list., defaults to <code>false</code>.</li>
+<li>
+<code>non-selected-list-label</code>, can be a <code>string</code> specifying the name of the non selected list., defaults to <code>false</code>.</li>
+<li>
+<code>info-all</code>, defaults to <code>'Showing all {0}'</code>, determines which <code>string</code> format to use when all options are visible.
+Set this to <code>false</code> to hide this information. Remember to insert the <code>{0}</code> placeholder.</li>
+<li>
+<code>info-filtered</code>, defaults to <code>'&lt;span class="label label-warning"&gt;Filtered&lt;/span&gt; {0} from {1}'</code>, determines which
+element format to use when some element is filtered. Remember to insert the <code>{0}</code> and <code>{1}</code>placeholders.</li>
+<li>
+<code>info-empty</code>, defaults to <code>'Empty list'</code>, determines the <code>string</code> to use when there are no options in the list.</li>
+</ul><h3>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h3>
+
+<p>The <code>example</code> folder shows a simple working demo of the dual list box.</p>
+
+<h2>
+<a name="development" class="anchor" href="#development"><span class="octicon octicon-link"></span></a>Development</h2>
+
+<h3>
+<a name="test-and-build" class="anchor" href="#test-and-build"><span class="octicon octicon-link"></span></a>Test and build</h3>
+
+<p>To build the directive yourself you need to have NodeJS. Then do the following:</p>
+
+<pre lang="shell"><code>$ npm install -g grunt-cli bower karma
+$ npm install
+$ bower install
+$ grunt
+</code></pre>
+
+<h3>
+<a name="contribute" class="anchor" href="#contribute"><span class="octicon octicon-link"></span></a>Contribute</h3>
+
+<p>To contribute, please follow the generic <a href="https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md">AngularJS Contributing Guidelines</a>, with the only exception to send the PR to the <code>develop</code> branch instead of <code>master</code>.</p>
+
+<h2>
+<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
+
+<p>Francesco Pontillo (<a href="mailto:francescopontillo@gmail.com">francescopontillo@gmail.com</a>)</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<pre><code>   Copyright 2014 Francesco Pontillo
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/frapontillo">frapontillo</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-49037569-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
