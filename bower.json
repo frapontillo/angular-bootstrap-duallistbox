@@ -1,6 +1,6 @@
 {
   "name": "angular-bootstrap-duallistbox",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Francesco Pontillo",
     "email": "francescopontillo@gmail.com",
@@ -19,13 +19,13 @@
   ],
   "main": "./dist/angular-bootstrap-duallistbox.min.js",
   "dependencies": {
-    "angular": "~1.2.14",
+    "angular": "~1.2.15",
     "jquery": "~2.0.3",
     "bootstrap": ">=2.3.2",
-    "bootstrap-duallistbox": "4f8cd71e2d6bd71be9d0d84c673b0abad2a44271"
+    "bootstrap-duallistbox": "3.0.1"
   },
   "devDependencies": {
-    "angular-mocks": "~1.2.14",
-    "angular-scenario": "~1.2.14"
+    "angular-mocks": "~1.2.15",
+    "angular-scenario": "~1.2.15"
   }
 }
