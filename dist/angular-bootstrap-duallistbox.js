@@ -1,6 +1,6 @@
 /**
  * angular-bootstrap-duallistbox
- * @version v0.0.1 - 2014-03-16
+ * @version v0.0.2 - 2014-03-26
  * @author Francesco Pontillo (francescopontillo@gmail.com)
  * @link https://github.com/frapontillo/angular-bootstrap-duallistbox
  * @license Apache License 2.0
