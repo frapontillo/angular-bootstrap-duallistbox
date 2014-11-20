@@ -1,6 +1,6 @@
 /**
  * angular-bootstrap-duallistbox
- * @version v0.0.2 - 2014-03-26
+ * @version v0.0.3 - 2014-11-20
  * @author Francesco Pontillo (francescopontillo@gmail.com)
  * @link https://github.com/frapontillo/angular-bootstrap-duallistbox
  * @license Apache License 2.0
@@ -17,7 +17,7 @@ angular.module('frapontillo.bootstrap-duallistbox').directive('bsDuallistbox', [
     return {
       restrict: 'A',
       require: 'ngModel',
-      link: function link(scope, element, attrs, controller) {
+      link: function link(scope, element, attrs) {
         //000011111111110000000000022222222220000000000000000000003333333333000000000000004444444444444440000000005555555555555550000000666666666666666000000000000000777777777700000000000000000008888888888
         var NG_OPTIONS_REGEXP = /^\s*([\s\S]+?)(?:\s+as\s+([\s\S]+?))?(?:\s+group\s+by\s+([\s\S]+?))?\s+for\s+(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+([\s\S]+?)(?:\s+track\s+by\s+([\s\S]+?))?$/;
         // The select collection
@@ -138,7 +138,11 @@ angular.module('frapontillo.bootstrap-duallistbox').directive('bsDuallistbox', [
          */
         var listenToModel = function () {
           // When ngModel changes, refresh the list
-          controller.$formatters.push(refresh);
+          // controller.$formatters.push(refresh);
+          scope.$watch(attrs.ngModel, function () {
+            initMaybe();
+            refresh();
+          });
           // When ngOptions changes, refresh the list
           scope.$watch(collection, refresh, true);
           // Watch for changes to the filter scope variables
@@ -162,12 +166,22 @@ angular.module('frapontillo.bootstrap-duallistbox').directive('bsDuallistbox', [
          * Refresh the Dual List Box using its own API.
          */
         var refresh = function () {
+          // TODO: consider removing $timeout calls
           $timeout(function () {
             element.bootstrapDualListbox('refresh');
           });
         };
+        /**
+         * If the directive has not been initialized yet, do so.
+         */
+        var initMaybe = function () {
+          // if it's the first initialization
+          if (!dualListBox) {
+            init();
+          }
+        };
         // Delay listbox init
-        $timeout(function () {
+        var init = function () {
           var defaults = {};
           // for every attribute the directive handles
           angular.forEach(attributes, function (attributeFunction, attributeName) {
@@ -205,9 +219,9 @@ angular.module('frapontillo.bootstrap-duallistbox').directive('bsDuallistbox', [
           var filterSelectedInput = container.find('.box2 .filter');
           filterSelectedInput.attr('ng-model', attrs.filterSelected);
           $compile(filterSelectedInput)(scope);
-          // Listen and respond to model changes
-          listenToModel();
-        });
+        };
+        // Listen and respond to model changes
+        listenToModel();
         // On destroy, collect ya garbage
         scope.$on('$destroy', function () {
           element.bootstrapDualListbox('destroy');
