@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('frapontillo.bootstrap-duallistbox')
-  .directive('bsDuallistbox', function ($compile, $timeout) {
+  .directive('bsDuallistbox', ['$compile', '$timeout', function ($compile, $timeout) {
     return {
       restrict: 'A',
       require: 'ngModel',
@@ -212,4 +212,4 @@ angular.module('frapontillo.bootstrap-duallistbox')
         });
       }
     };
-  });
+  }]);
