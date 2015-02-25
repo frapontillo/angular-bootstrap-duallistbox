@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('frapontillo.bootstrap-duallistbox')
+angular.module('frapontillo.bootstrap-duallistbox', [])
   .directive('bsDuallistbox', function ($compile, $timeout) {
     return {
       restrict: 'A',
