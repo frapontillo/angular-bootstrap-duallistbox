@@ -6,12 +6,19 @@ angular.module('bsDuallistboxApp')
     $scope.list = [];
 
     var updateList = function() {
-      for (var i = $scope.list.length; i <= lastIndex; i++) {
-        $scope.list.push({
-          'id': '_' + (i+1),
-          'text': 'element ' + (i+1)
-        });
-      }
+      $scope.list.push({
+        'id': '_1',
+        'text': 'one'
+      },{
+        'id': '_2',
+        'text': 'two'
+      },{
+        'id': '_3',
+        'text': 'three'
+      },{
+        'id': '_4',
+        'text': 'four'
+      });
     };
 
     $scope.reset = function() {
@@ -43,7 +50,7 @@ angular.module('bsDuallistboxApp')
       infoAll: 'Showing all {0}!',
       infoFiltered: '<span class="label label-warning">Filtered</span> {0} from {1}!',
       infoEmpty: 'Empty list!',
-      filterValues: false
+      filterValues: true
     };
 
     updateList();
