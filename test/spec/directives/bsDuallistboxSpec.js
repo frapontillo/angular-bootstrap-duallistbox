@@ -25,21 +25,42 @@ describe('Directive: bsDuallistbox', function () {
         list: ['one', 'two', 'three', 'four', 'five', 'forty-two'],
         model: []
       },
-      element: ''
+      element: 'ng-options="element for element in list" '
     },
     'bootstrap2': {
       scope: {
         bootstrap2: false
       },
-      element: 'bootstrap2="{{ bootstrap2 }}"'
+      element: 'bootstrap2="{{ bootstrap2 }}" ' +
+        'ng-options="element for element in list" '
     },
     'filter': {
       scope: {
         filter: { },
         info: { },
-        model: ['two', 'four']
+        list: [{
+          'id': '_1',
+          'text': 'one'
+        },{
+          'id': '_2',
+          'text': 'two'
+        },{
+          'id': '_3',
+          'text': 'three'
+        },{
+          'id': '_4',
+          'text': 'four'
+        }],
+        model: [{
+          'id': '_2',
+          'text': 'two'
+        }, {
+          'id': '_4',
+          'text': 'four'
+        }]
       },
       element: '' +
+        'ng-options="element as element.text for element in list track by element.id" ' +
         'filter-placeholder="{{ filter.filterPlaceholder }}" ' +
         'show-filter-inputs="{{ filter.showFilterInputs }}" ' +
         'filter-non-selected="filter.filterNonSelected" ' +
@@ -50,7 +71,9 @@ describe('Directive: bsDuallistbox', function () {
         'info-filtered="{{ info.textFiltered }}" '
     },
     'empty': {
-      element: 'info-empty="{{ info.textEmpty }}" '
+      element: '' +
+        'ng-options="element for element in list" ' +
+        'info-empty="{{ info.textEmpty }}" '
     },
     'buttons': {
       scope: {
@@ -58,6 +81,7 @@ describe('Directive: bsDuallistbox', function () {
         }
       },
       element: '' +
+        'ng-options="element for element in list" ' +
         'move-selected-label="{{ labels.moveSelected }}" ' +
         'move-all-label="{{ labels.moveAll }}" ' +
         'remove-selected-label="{{ labels.removeSelected }}" ' +
@@ -69,16 +93,19 @@ describe('Directive: bsDuallistbox', function () {
         }
       },
       element: '' +
+        'ng-options="element for element in list" ' +
         'non-selected-list-label="{{ labels.nonSelected }}" ' +
         'selected-list-label="{{ labels.selected }}" ' +
         'postfix="{{ postfix }}" '
     },
     'move': {
       element: '' +
+        'ng-options="element for element in list" ' +
         'move-on-select="{{ moveOnSelect }}" '
     },
     'preserve': {
       element: '' +
+        'ng-options="element for element in list" ' +
         'move-on-select="{{ moveOnSelect }}" ' +
         'preserve-selection="{{ preserveSelection }}" ',
       scope: {
@@ -89,6 +116,7 @@ describe('Directive: bsDuallistbox', function () {
     },
     'height': {
       element: '' +
+        'ng-options="element for element in list" ' +
         'select-min-height="{{ minimalHeight }}" '
     }
   };
@@ -96,7 +124,6 @@ describe('Directive: bsDuallistbox', function () {
   var basicElement = [
     '<select ' +
       'ng-model="model" ' +
-      'ng-options="element for element in list" ' +
       'multiple bs-duallistbox name="mySelect" ',
     '></select>'
   ];
@@ -239,7 +266,7 @@ describe('Directive: bsDuallistbox', function () {
         expect($input.val()).toBe('');
       });
       // both selects have elements
-      expect(element.find('#bootstrap-duallistbox-nonselected-list_mySelect > option').length).toBe(4);
+      expect(element.find('#bootstrap-duallistbox-nonselected-list_mySelect > option').length).toBe(2);
       expect(element.find('#bootstrap-duallistbox-selected-list_mySelect > option').length).toBe(2);
     }));
 
@@ -252,9 +279,8 @@ describe('Directive: bsDuallistbox', function () {
       $timeout.flush();
       // the non selected list must contain only 'three' and 'forty-two'
       var nonSelectedOpts = element.find('#bootstrap-duallistbox-nonselected-list_mySelect > option');
-      expect(nonSelectedOpts.length).toBe(2);
+      expect(nonSelectedOpts.length).toBe(1);
       expect(Array.prototype.map.call(nonSelectedOpts, getText)).toContain('three');
-      expect(Array.prototype.map.call(nonSelectedOpts, getText)).toContain('forty-two');
       // the selected list must contain only 'four'
       var selectedOpts = element.find('#bootstrap-duallistbox-selected-list_mySelect > option');
       expect(selectedOpts.length).toBe(1);
@@ -265,8 +291,8 @@ describe('Directive: bsDuallistbox', function () {
     it('should filter the selects with values when the model changes', inject(function () {
       // filter both lists
       scope.filter.filterValues = true;
-      scope.filter.filterNonSelected = '0';
-      scope.filter.filterSelected = '3';
+      scope.filter.filterNonSelected = '1';
+      scope.filter.filterSelected = '4';
       scope.$apply();
       $timeout.flush();
       // the non selected list must contain only 'one' and 'four'
@@ -286,9 +312,8 @@ describe('Directive: bsDuallistbox', function () {
       element.find('.box2 .filter').val('f').change();
       // the non selected list must contain only 'three' and 'forty-two'
       var nonSelectedOpts = element.find('#bootstrap-duallistbox-nonselected-list_mySelect > option');
-      expect(nonSelectedOpts.length).toBe(2);
+      expect(nonSelectedOpts.length).toBe(1);
       expect(Array.prototype.map.call(nonSelectedOpts, getText)).toContain('three');
-      expect(Array.prototype.map.call(nonSelectedOpts, getText)).toContain('forty-two');
       // the selected list must contain only 'four'
       var selectedOpts = element.find('#bootstrap-duallistbox-selected-list_mySelect > option');
       expect(selectedOpts.length).toBe(1);
@@ -299,9 +324,9 @@ describe('Directive: bsDuallistbox', function () {
     it('should filter the selects with values when the view changes', inject(function () {
       // filter both lists
       scope.filter.filterValues = true;
+      element.find('.box1 .filter').val('1').change();
+      element.find('.box2 .filter').val('4').change();
       scope.$apply();
-      element.find('.box1 .filter').val('0').change();
-      element.find('.box2 .filter').val('3').change();
       // the non selected list must contain only 'one' and 'four'
       var nonSelectedOpts = element.find('#bootstrap-duallistbox-nonselected-list_mySelect > option');
       expect(nonSelectedOpts.length).toBe(1);
@@ -318,11 +343,11 @@ describe('Directive: bsDuallistbox', function () {
     it('should change the info text for unfiltered lists', inject(function () {
       var element = compileDirective('filter');
       // filter inputs should be empty
-      expect(element.find('.box1 .info').html()).toBe('Showing all 4');
+      expect(element.find('.box1 .info').html()).toBe('Showing all 2');
       expect(element.find('.box2 .info').html()).toBe('Showing all 2');
       scope.info.text = 'All {0}';
       scope.$apply();
-      expect(element.find('.box1 .info').html()).toBe('All 4');
+      expect(element.find('.box1 .info').html()).toBe('All 2');
       expect(element.find('.box2 .info').html()).toBe('All 2');
     }));
 
@@ -334,11 +359,11 @@ describe('Directive: bsDuallistbox', function () {
       scope.$apply();
       $timeout.flush();
       // filter inputs should be empty
-      expect(element.find('.box1 .info').html()).toBe('<span class="label label-warning">Filtered</span> 2 from 4');
+      expect(element.find('.box1 .info').html()).toBe('<span class="label label-warning">Filtered</span> 1 from 2');
       expect(element.find('.box2 .info').html()).toBe('<span class="label label-warning">Filtered</span> 1 from 2');
       scope.info.textFiltered = '{0}/{1}';
       scope.$apply();
-      expect(element.find('.box1 .info').html()).toBe('2/4');
+      expect(element.find('.box1 .info').html()).toBe('1/2');
       expect(element.find('.box2 .info').html()).toBe('1/2');
     }));
 
