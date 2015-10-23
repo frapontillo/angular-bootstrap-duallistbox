@@ -183,7 +183,7 @@ angular.module('frapontillo.bootstrap-duallistbox')
             selectedListLabel: defaults.selectedListLabel,
             nonSelectedListLabel: defaults.nonSelectedListLabel,
             helperSelectNamePostfix: defaults.postfix,
-            selectOrMinimalHeight: defaults.selectMinHeight,
+            selectorMinimalHeight: defaults.selectMinHeight,
             showFilterInputs: defaults.filter,
             nonSelectedFilter: '',
             selectedFilter: '',
