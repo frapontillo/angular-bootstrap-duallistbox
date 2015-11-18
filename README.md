@@ -60,6 +60,9 @@ The available options for the dual listbox are:
 ###Example
 The `example` folder shows a simple working demo of the dual list box.
 
+###Related Project
+* [Duallist for Angular](https://github.com/tushariscoolster/ng-duallist)
+
 ##Development
 
 ###Test and build
