@@ -20,7 +20,7 @@ angular.module('frapontillo.bootstrap-duallistbox')
         var attributes = {
           'bootstrap2': {changeFn: 'setBootstrap2Compatible', transformFn: getBooleanValue},
           'postfix': 'setHelperSelectNamePostfix',
-          'selectMinHeight': {changeFn: 'setSelectOrMinimalHeight', defaultValue: 100},
+          'selectMinHeight': {changeFn: 'setSelectorMinimalHeight', defaultValue: 100},
 
           'filter':  {changeFn: 'setShowFilterInputs', defaultValue: true, transformFn: getBooleanValue},
           'filterClear': {changeFn: 'setFilterTextClear', defaultValue: 'show all'},
