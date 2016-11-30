@@ -64,7 +64,8 @@ angular.module('frapontillo.bootstrap-duallistbox').directive('bsDuallistbox', [
             'nonSelectedListLabel': 'setNonSelectedListLabel',
             'infoAll': {
               changeFn: 'setInfoText',
-              defaultValue: 'Showing all {0}'
+	      defaultValue: 'Showing all {0}',
+	      transformFn: getBooleanValue	
             },
             'infoFiltered': {
               changeFn: 'setInfoTextFiltered',
