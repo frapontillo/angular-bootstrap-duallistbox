@@ -1,6 +1,6 @@
 /**
  * angular-bootstrap-duallistbox
- * @version v0.1.0 - 2015-06-13
+ * @version v0.1.1 - 2018-05-15
  * @author Francesco Pontillo (francescopontillo@gmail.com)
  * @link https://github.com/frapontillo/angular-bootstrap-duallistbox
  * @license Apache License 2.0
@@ -27,6 +27,10 @@ angular.module('frapontillo.bootstrap-duallistbox').directive('bsDuallistbox', [
         };
         // The attribute names to $observe with related functions to call
         var attributes = {
+            'clickSelect': {
+              changeFn: 'clickSelect',
+              defaultValue: null
+            },
             'bootstrap2': {
               changeFn: 'setBootstrap2Compatible',
               transformFn: getBooleanValue
@@ -211,8 +215,34 @@ angular.module('frapontillo.bootstrap-duallistbox').directive('bsDuallistbox', [
             infoTextEmpty: defaults.infoEmpty,
             filterOnValues: defaults.filterValues
           });
+          // Check if clickSelect exists pass option if function else set value to option
+          /*jslint evil: true */
+          if (defaults.clickSelect && eval('scope.' + defaults.clickSelect)) {
+            dualListBox.on('click', function (e) {
+              if (e.target.value) {
+                if (eval('typeof scope.' + defaults.clickSelect) === 'function') {
+                  eval('scope.' + defaults.clickSelect)(eval(e.target.value));
+                } else {
+                  eval('scope.' + defaults.clickSelect + '=' + eval(e.target.value));
+                }
+              }
+            });
+          }
           // Inject the ng-model into the filters and re-compile them
           var container = element.bootstrapDualListbox('getContainer');
+          // Check if clickSelect exists pass option if function else set value to option
+          /*jslint evil: true */
+          if (defaults.clickSelect && eval('scope.' + defaults.clickSelect)) {
+            container.on('click', function (e) {
+              if (e.target.value) {
+                if (eval('typeof scope.' + defaults.clickSelect) === 'function') {
+                  eval('scope.' + defaults.clickSelect)(eval(e.target.value));
+                } else {
+                  eval('scope.' + defaults.clickSelect + '=' + eval(e.target.value));
+                }
+              }
+            });
+          }
           var filterNonSelectedInput = container.find('.box1 .filter');
           filterNonSelectedInput.attr('ng-model', attrs.filterNonSelected);
           $compile(filterNonSelectedInput)(scope);

@@ -24,6 +24,17 @@ The directive has to be applied to an already existing `select` element with the
 	></select>
 ```
 
+clickSelect parameter. This parameter if anything is passed in will attempt to pass in a clicked option's id to a function or attribute bound to the $scope. Such as if `$scope.logId = function(id){ console.log(id)}`.
+
+```html
+<select
+	ng-options="el in elements track by el.id"
+	multiple move-on-select="false" click-select="logId"
+    ng-model="selections"
+    bs-duallistbox
+	></select>
+```
+
 Set the `select` attributes as you would normally do for a regular multiple list, and add `bs-duallistbox` to enable the plugin.
 
 ####Options
