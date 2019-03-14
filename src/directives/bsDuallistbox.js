@@ -135,7 +135,7 @@ angular.module('frapontillo.bootstrap-duallistbox')
               var actualFunction = getAttributeChangeFunction(attributeName);
               var actualValue = getAttributeValueOrDefault(attributeName);
               // Depending on the attribute, call the right function (and always refresh)
-              element.bootstrapDualListbox(actualFunction, actualValue, true);
+              $(element).bootstrapDualListbox(actualFunction, actualValue, true);
             });
           });
         };
@@ -146,7 +146,7 @@ angular.module('frapontillo.bootstrap-duallistbox')
         var refresh = function() {
           // TODO: consider removing $timeout calls
           $timeout(function () {
-            element.bootstrapDualListbox('refresh');
+            $(element).bootstrapDualListbox('refresh');
           });
         };
 
@@ -170,7 +170,7 @@ angular.module('frapontillo.bootstrap-duallistbox')
           });
 
           // Init the plugin
-          dualListBox = element.bootstrapDualListbox({
+          dualListBox = $(element).bootstrapDualListbox({
             bootstrap2Compatible: defaults.bootstrap2,
             filterTextClear: defaults.filterClear,
             filterPlaceHolder: defaults.filterPlaceholder,
@@ -194,7 +194,7 @@ angular.module('frapontillo.bootstrap-duallistbox')
           });
 
           // Inject the ng-model into the filters and re-compile them
-          var container = element.bootstrapDualListbox('getContainer');
+          var container = $(element).bootstrapDualListbox('getContainer');
           var filterNonSelectedInput = container.find('.box1 .filter');
           filterNonSelectedInput.attr('ng-model', attrs.filterNonSelected);
           $compile(filterNonSelectedInput)(scope);
@@ -208,7 +208,7 @@ angular.module('frapontillo.bootstrap-duallistbox')
 
         // On destroy, collect ya garbage
         scope.$on('$destroy', function () {
-          element.bootstrapDualListbox('destroy');
+          $(element).bootstrapDualListbox('destroy');
         });
       }
     };

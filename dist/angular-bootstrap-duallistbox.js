@@ -1,8 +1,8 @@
 /**
  * angular-bootstrap-duallistbox
- * @version v0.1.0 - 2015-06-13
+ * @version v0.1.0 - 2019-03-14
  * @author Francesco Pontillo (francescopontillo@gmail.com)
- * @link https://github.com/frapontillo/angular-bootstrap-duallistbox
+ * @link https://github.com/dbk1985/angular-bootstrap-duallistbox
  * @license Apache License 2.0
 **/
 
@@ -158,7 +158,7 @@ angular.module('frapontillo.bootstrap-duallistbox').directive('bsDuallistbox', [
               var actualFunction = getAttributeChangeFunction(attributeName);
               var actualValue = getAttributeValueOrDefault(attributeName);
               // Depending on the attribute, call the right function (and always refresh)
-              element.bootstrapDualListbox(actualFunction, actualValue, true);
+              $(element).bootstrapDualListbox(actualFunction, actualValue, true);
             });
           });
         };
@@ -168,7 +168,7 @@ angular.module('frapontillo.bootstrap-duallistbox').directive('bsDuallistbox', [
         var refresh = function () {
           // TODO: consider removing $timeout calls
           $timeout(function () {
-            element.bootstrapDualListbox('refresh');
+            $(element).bootstrapDualListbox('refresh');
           });
         };
         /**
@@ -189,7 +189,7 @@ angular.module('frapontillo.bootstrap-duallistbox').directive('bsDuallistbox', [
             defaults[attributeName] = actualValue;
           });
           // Init the plugin
-          dualListBox = element.bootstrapDualListbox({
+          dualListBox = $(element).bootstrapDualListbox({
             bootstrap2Compatible: defaults.bootstrap2,
             filterTextClear: defaults.filterClear,
             filterPlaceHolder: defaults.filterPlaceholder,
@@ -212,7 +212,7 @@ angular.module('frapontillo.bootstrap-duallistbox').directive('bsDuallistbox', [
             filterOnValues: defaults.filterValues
           });
           // Inject the ng-model into the filters and re-compile them
-          var container = element.bootstrapDualListbox('getContainer');
+          var container = $(element).bootstrapDualListbox('getContainer');
           var filterNonSelectedInput = container.find('.box1 .filter');
           filterNonSelectedInput.attr('ng-model', attrs.filterNonSelected);
           $compile(filterNonSelectedInput)(scope);
@@ -224,7 +224,7 @@ angular.module('frapontillo.bootstrap-duallistbox').directive('bsDuallistbox', [
         listenToModel();
         // On destroy, collect ya garbage
         scope.$on('$destroy', function () {
-          element.bootstrapDualListbox('destroy');
+          $(element).bootstrapDualListbox('destroy');
         });
       }
     };
