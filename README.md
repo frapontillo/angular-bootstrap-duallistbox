@@ -1,5 +1,8 @@
 angular-bootstrap-duallistbox [![Build Status](https://travis-ci.org/frapontillo/angular-bootstrap-duallistbox.png)](https://travis-ci.org/frapontillo/angular-bootstrap-duallistbox)
 ========================
+###Dependencies
+"angular": "^1.7.5"
+"bootstrap-duallistbox": "^3.0.6"
 
 Angular directive to include [Bootstrap Dual Listbox](https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox) in your apps.
 
