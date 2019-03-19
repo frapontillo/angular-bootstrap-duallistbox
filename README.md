@@ -1,5 +1,8 @@
 angular-bootstrap-duallistbox [![Build Status](https://travis-ci.org/frapontillo/angular-bootstrap-duallistbox.png)](https://travis-ci.org/frapontillo/angular-bootstrap-duallistbox)
 ========================
+###Dependencies
+"angular": "^1.7.5"
+"bootstrap-duallistbox": "^3.0.6"
 
 Angular directive to include [Bootstrap Dual Listbox](https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox) in your apps.
 
@@ -7,7 +10,8 @@ Angular directive to include [Bootstrap Dual Listbox](https://github.com/istvan-
 
 ###Installation
 ```shell
-$ bower install angular-bootstrap-duallistbox
+$ npm install --save https://github.com/dbk1985/angular-bootstrap-duallistbox.git
+$ npm uninstall angular-bootstrap-duallistbox
 ```
 
 This will install AngularJS, jQuery, and the original bootstrap-duallistbox.

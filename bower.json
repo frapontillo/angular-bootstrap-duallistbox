@@ -4,12 +4,12 @@
   "author": {
     "name": "Francesco Pontillo",
     "email": "francescopontillo@gmail.com",
-    "url": "https://github.com/frapontillo"
+    "url": "https://github.com/dbk1985"
   },
-  "homepage": "https://github.com/frapontillo/angular-bootstrap-duallistbox",
+  "homepage": "https://github.com/dbk1985/angular-bootstrap-duallistbox",
   "repository": {
     "type": "git",
-    "url": "git@github.com:frapontillo/angular-bootstrap-duallistbox.git"
+    "url": "git@github.com:dbk1985/angular-bootstrap-duallistbox.git"
   },
   "licenses": [
     {
