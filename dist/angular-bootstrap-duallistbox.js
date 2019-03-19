@@ -1,6 +1,6 @@
 /**
  * angular-bootstrap-duallistbox
- * @version v0.1.0 - 2019-03-15
+ * @version v0.1.0 - 2019-03-19
  * @author Francesco Pontillo (francescopontillo@gmail.com)
  * @link https://github.com/dbk1985/angular-bootstrap-duallistbox
  * @license Apache License 2.0
@@ -218,6 +218,10 @@ angular.module('frapontillo.bootstrap-duallistbox').directive('bsDuallistbox', [
           });
           // Inject the ng-model into the filters and re-compile them
           var container = element.bootstrapDualListbox('getContainer');
+          var styleClass = attrs['style-class'];
+          if (styleClass) {
+            container.find('.box1, .box2').removeClass('col-md-6').removeClass('span6').addClass(styleClass);
+          }
           var filterNonSelectedInput = container.find('.box1 .filter');
           filterNonSelectedInput.attr('ng-model', attrs.filterNonSelected);
           $compile(filterNonSelectedInput)(scope);

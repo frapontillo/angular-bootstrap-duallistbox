@@ -200,6 +200,10 @@ angular.module('frapontillo.bootstrap-duallistbox')
 
           // Inject the ng-model into the filters and re-compile them
           var container = element.bootstrapDualListbox('getContainer');
+          var styleClass = attrs['style-class'];
+          if (styleClass) {
+              container.find('.box1, .box2').removeClass('col-md-6').removeClass('span6').addClass(styleClass);
+          }
           var filterNonSelectedInput = container.find('.box1 .filter');
           filterNonSelectedInput.attr('ng-model', attrs.filterNonSelected);
           $compile(filterNonSelectedInput)(scope);
